@@ -13,6 +13,30 @@ interface Exchange {
   image: string;
 }
 
+const ExchangeListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Title = styled.h1`
+  margin: 0;
+  text-align: center;
+`;
+
+const List = styled.ul`
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+`;
+
 const ExchangeListItem = styled.li`
   display: flex;
   align-items: center;
@@ -49,9 +73,9 @@ const ExchangeList: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Cryptocurrency Exchanges</h1>
-      <ul>
+    <ExchangeListWrapper>
+      <Title>Cryptocurrency Exchanges</Title>
+      <List>
         {exchanges.map((exchange) => (
           <Link to={`/exchanges/${exchange.id}`} key={exchange.id}>
             <ExchangeListItem>
@@ -59,13 +83,14 @@ const ExchangeList: React.FC = () => {
               <div>
                 <h2>{exchange.name}</h2>
                 <p>Country: {exchange.country}</p>
+                <p>URL: {exchange.url}</p>
                 <p>Trust Rank: {exchange.trust_score_rank}</p>
               </div>
             </ExchangeListItem>
           </Link>
         ))}
-      </ul>
-    </div>
+      </List>
+    </ExchangeListWrapper>
   );
 };
 
